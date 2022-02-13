@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title%}{% endblock %}</title>
+    <link rel="stylesheet" href="/static/bootstrap.min.css">
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+
+            <ul class="navbar-nav me-auto">
+
+                <li class="nav-item">
+                    <a class="nav-link active fw-bold" href="/">Home</a>
+                </li>
+
+                {% if 'username' in session %}
+                
+                <li class="nav-item">
+                    <a class="nav-link pr-3" href="/logout">Logout</a>
+                </li>
+
+                {% else %}
+
+                <li class="nav-item">
+                    <a class="nav-link pr-3" href="/login">Login</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/register">Register</a>
+                </li>
+
+                {% endif %}
+
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container" style="margin-top: 2em">
+        {% for category, msg in get_flashed_messages(with_categories=True) %}
+        <div class="alert alert-{{category}}">{{ msg }}</div>
+        {% endfor %}
+
+
+        {% block content %}
+        <!-- contents will go in here -->
+        {% endblock %}
+
+    </div>
+
+
+    
+</body>
+</html>
